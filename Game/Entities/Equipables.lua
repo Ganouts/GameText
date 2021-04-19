@@ -2,10 +2,11 @@ local Items = require("Entities/Items")
 
 local Equipables = {}
 
-function Equipables.New(name, type, rarity, description, price, marketable)
+function Equipables.New(name, type, class, rarity, description, price, marketable)
   local instance = {
     Name = name,
     Type = type,
+    Class = class,
     Rarity = rarity,
     Description = description,
     Price = price,

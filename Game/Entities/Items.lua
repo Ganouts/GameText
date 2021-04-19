@@ -4,6 +4,7 @@ function Items.New(name, type, rarity, description, price, marketable, equipable
   local instance = {
     Name = name,
     Type = type,
+    Class = class,
     Rarity = rarity,
     Description = description,
     Price = price,

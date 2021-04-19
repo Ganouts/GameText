@@ -1,6 +1,7 @@
 local Class = require("Entities/Class")
 local Commands = require("Entities/Commands")
 local Player = {}
+Player.__index = Player
 
 function Player.New()
   local instance = {
@@ -14,24 +15,21 @@ function Player.New()
     Class = "None",
     Health = 100,
     MaxHealth = 100,
-    Strength = 0,
-    Agility = 0,
-    Intelligence = 0,
-    Hands = {Left = "Empty", Right = "Empty"},
-    Body = {Head = "Empty", Chest = "Empty", Waist = "Empty", Legs = "Empty", Foot = "Empty"},
-    Damage = 0,
-    Defense = 0,
+    Damage = 0, --Dano causado aos inimigos.
+    Resistance = 0, -- Dano reduzido ao receber.
+    Defense = 0, --Chance de defender por porcentagem.
+    Hands = {Shield = "none", Weapon = "none"}, --Shield = Escudo | Weapon = Arma
+    Body = {Armor = "none", Backpack = "none"}, --Armor = Armadura | Backpack = Mochila
     --Estados
     Live = true,
     InShop = false,
   }
-  setmetatable(instance, {__index = Player})
+  setmetatable(instance, Player)
   return instance
 end
 
-function Player:EquipWeapon(weapon)
-  self.Hands[Left] = weapon.Name
-  self.Hands[Right] = weapon.Name
+function Player:EquipItem(item)
+  
 end
 
 function Player:LoseMoney(moneyLose)
@@ -43,7 +41,7 @@ end
 
 function Player:GainExperience(experienceAdd)
 self.Experience = self.Experience + experienceAdd
-if self.Experience = self.MaxExperience then
+if self.Experience == self.MaxExperience then
   self:LevelUp(1)
 elseif self.Experience > self.MaxExperience then
   local ExperienceRemain = self.Experience - self.MaxExperience
@@ -58,7 +56,7 @@ end
 
 function Player:LevelUp(levelAdd)
  self.Level = self.Level + levelAdd
- self.Experience = 0 
+ self.Experience = 0
  self.MaxExperience = (self.Level * 100) - 50
 end
 
@@ -75,9 +73,6 @@ end
 
 function Player:Attributes()
   print("Saúde: " .. self.Health)
-  print("Força: " .. self.Strength)
-  print("Agilidade: " .. self.Agility)
-  print("Inteligência: " .. self.Intelligence)
 end
 
 function Player:ChangeName(name)
@@ -103,8 +98,8 @@ function Player:GainHealth(healthAdd)
       self.health = self.MaxHealth
     end
     return true
-  else 
-    return false 
+  else
+    return false
   end
 end
 
@@ -147,6 +142,7 @@ function Player:RemoveFromBackpack(slot)
   for i = next(self.Backpack, slot),#self.Backpack do
     self.Backpack[i].BackpackSlot = i - 1
   end
+  slot.BackpackSlot = 0
   return table.remove(self.Backpack, slot)
 end
 

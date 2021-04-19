@@ -5,7 +5,7 @@ local Commands = require("Entities/Commands")
 local Shields = {}
 
 function Shields.New(name, type, rarity, description, price, marketable, size, defense)
-  local instance = Equipables.New(name, type, rarity, description, price, marketable)
+  local instance = Equipables.New(name, type, "Shield", rarity, description, price, marketable)
   instance.Size = size
   instance.Defense = defense
   return instance
