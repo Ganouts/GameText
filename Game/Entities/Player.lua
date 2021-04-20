@@ -5,32 +5,33 @@ Player.__index = Player
 
 function Player.New()
   local instance = {
-    Name = "None",
-    Age = 20,
-    Experience = 0,
-    MaxExperience = 100,
-    Level = 1,
-    Money = 0,
-    Backpack = {},
-    Class = "None",
-    Health = 100,
-    MaxHealth = 100,
+    Name = "None", -- O Nome do personagem.
+    Class = "None", -- Classe(Espadachim, Engenheiro, Paladino).
+    Age = 20, -- Idade.
+    Experience = 0, -- Experiencia.
+    MaxExperience = 100, --O Máximo de experiencia.
+    Level = 1, --O Level, cada level tem seu máximo de experiencia próprio.
+    Money = 0,  -- O dinheiro do jogo, usado para comprar itens.
+    Health = 100, -- Vida atual.
+    MaxHealth = 100, -- Vida máxima.
     Damage = 0, --Dano causado aos inimigos.
     Resistance = 0, -- Dano reduzido ao receber.
     Defense = 0, --Chance de defender por porcentagem.
+    Backpack = {}, --Mochila do player.
     Hands = {Shield = "none", Weapon = "none"}, --Shield = Escudo | Weapon = Arma
     Body = {Armor = "none", Backpack = "none"}, --Armor = Armadura | Backpack = Mochila
     --Estados
     Live = true,
     InShop = false,
   }
+
   setmetatable(instance, Player)
   return instance
 end
 
-function Player:EquipItem(item)
-  
-end
+--[[function Player:EquipItem(item)
+
+end]]
 
 function Player:LoseMoney(moneyLose)
   if (self.Money - moneyLose) >= 0 then
@@ -124,26 +125,6 @@ function Player:ChooseClass(answer)
   elseif answer == "engineer" then
     Class.Engineer(self)
   end
-end
-
-function Player:ViewBackpack()
-  for i,v in pairs(self.Backpack) do
-    print(" ["..v.BackpackSlot.."] " .. v.Name .. " | Tipo: " .. v.Type .. " | Raridade: " .. v.Rarity .. " | Preço: " .. v.Price)
-  end
-end
-
-function Player:PutInBackpack(item)
-  table.insert(self.Backpack, item)
-  item.BackpackSlot = #self.Backpack
-end
-
-function Player:RemoveFromBackpack(slot)
-  if next(self.Backpack, slot) == nil then return table.remove(self.Backpack, slot) end
-  for i = next(self.Backpack, slot),#self.Backpack do
-    self.Backpack[i].BackpackSlot = i - 1
-  end
-  slot.BackpackSlot = 0
-  return table.remove(self.Backpack, slot)
 end
 
 return Player

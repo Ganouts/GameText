@@ -11,7 +11,6 @@ function Items.New(name, type, rarity, description, price, marketable, equipable
     Marketable = marketable,
     Equipable = equipable,
     Consumable = consumable,
-    BackpackSlot = 0,
   }
   setmetatable(instance, {__index = Items})
   return instance
