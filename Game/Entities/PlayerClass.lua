@@ -1,6 +1,6 @@
-local Class = {}
+local PlayerClass = {}
 
-function Class.Espadachim(player)
+function PlayerClass.Espadachim(player)
   if player.Class == "None" then
     player.Class = "Espadachim"
     player.Strength = 1
@@ -9,7 +9,7 @@ function Class.Espadachim(player)
   end
 end
 
-function Class.Paladino(player)
+function PlayerClass.Paladino(player)
   if player.Class == "None" then
     player.Class = "Paladino"
     player.Strength = 6
@@ -18,7 +18,7 @@ function Class.Paladino(player)
   end
 end
 
-function Class.Engineer(player)
+function PlayerClass.Engineer(player)
   if player.Class == "None" then
     player.Class = "Engineer"
     player.Strength = 2
@@ -27,4 +27,4 @@ function Class.Engineer(player)
   end
 end
 
-return Class
+return PlayerClass

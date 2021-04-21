@@ -1,19 +1,3 @@
---Módulos e Classes
-local Equipables = require("Entities/Equipables")
-local Commands = require("Entities/Commands")
---Módulo
-local Weapons = {}
-
-function Weapons.New(name, type, rarity, description, price, marketable, damage, effect)
-  local instance = Equipables.New(name, type, "Weapon", rarity, description, price, marketable)
-  instance.Damage = damage
-  instance.Effect = effect
-  return instance
-end
-
-function Weapons.Create(type, name)
-  return Weapons.New(Commands.ReturnAttributes(Weapons[type][name]))
-end
 
 --[[ Propriedades das Armas.
 Name = ,
@@ -26,6 +10,7 @@ Damage = ,
 Effect = ,
 ]]
 --21 ARMAS ADICIONADA!
+
 Weapons.Sword = {
   ["Azyt"] = {
     Name = "Azyt",
@@ -240,4 +225,3 @@ Weapons.Axe = {
     Effect = "Atordoamento",
   },
 }
-return Weapons

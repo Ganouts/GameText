@@ -7,7 +7,7 @@ function Backpack.New(_tier, _description)
     Class = "Backpack",
     Description = _description,
     Tier = _tier,
-    MaxSlots = _tier * 10,
+    SlotsMax = _tier * 10,
     Slots = {},
   }
 
@@ -17,7 +17,7 @@ end
 
 --Métodos
 function Backpack:ViewBackpack()
-  print("Espaço Máximo: " .. self.MaxSlots .. " | Espaços Utilizado: " .. #self.Slots)
+  print("Espaço Máximo: " .. self.SlotsMax .. " | Espaços Utilizado: " .. #self.Slots)
 
   for i, v in pairs(self.Slots) do
     --print(" [".. i .."] " .. v.Name .. " | Tipo: " .. v.Type .. " | Raridade: " .. v.Rarity .. " | Preço: " .. v.Price)
@@ -25,7 +25,7 @@ function Backpack:ViewBackpack()
 end
 
 function Backpack:PutInBackpack(item)
-  if #self.Slots < self.MaxSlots then
+  if #self.Slots < self.SlotsMax then
     table.insert(self.Slots, item)
     print(item.Name .. " adicionado ao inventário.")
   else

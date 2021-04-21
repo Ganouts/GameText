@@ -1,23 +1,27 @@
-local Class = require("Entities/Class")
+--Módulos//
 local Commands = require("Entities/Commands")
+local PlayerClass = require("Entities/PlayerClass")
+local Backpack = require("Entities/Backpack")
+
 local Player = {}
 Player.__index = Player
 
+--Função construtora//
 function Player.New()
   local instance = {
     Name = "None", -- O Nome do personagem.
     Class = "None", -- Classe(Espadachim, Engenheiro, Paladino).
     Age = 20, -- Idade.
     Experience = 0, -- Experiencia.
-    MaxExperience = 100, --O Máximo de experiencia.
-    Level = 1, --O Level, cada level tem seu máximo de experiencia próprio.
+    MaxExperience = 100, -- O Máximo de experiencia.
+    Level = 1, -- O Level, cada level tem seu máximo de experiencia próprio.
     Money = 0,  -- O dinheiro do jogo, usado para comprar itens.
     Health = 100, -- Vida atual.
     MaxHealth = 100, -- Vida máxima.
-    Damage = 0, --Dano causado aos inimigos.
+    Damage = 0, -- Dano causado aos inimigos.
     Resistance = 0, -- Dano reduzido ao receber.
-    Defense = 0, --Chance de defender por porcentagem.
-    Backpack = {}, --Mochila do player.
+    Dodge = 0, -- Chance de esquiva em porcentagem.
+    Backpack = {}, -- Mochila do player.
     Hands = {Shield = "none", Weapon = "none"}, --Shield = Escudo | Weapon = Arma
     Body = {Armor = "none", Backpack = "none"}, --Armor = Armadura | Backpack = Mochila
     --Estados
@@ -29,6 +33,7 @@ function Player.New()
   return instance
 end
 
+--Métodos//
 --[[function Player:EquipItem(item)
 
 end]]
@@ -112,7 +117,7 @@ function Player:TakeDamage(damage)
   end
 end
 
-function Player:AttackEnemy(enemy)
+function Player:Attack(enemy)
   enemy:TakeDamage(self.Damage)
 end
 

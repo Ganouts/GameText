@@ -2,7 +2,7 @@ local Item = {}
 Item.__index = Item
 
 --Função construtora//
-function Item.New(_name, _type, _rarity, _description, _price, _marketable)
+function Item.New(_name, _type, _class, _rarity, _description, _price, _marketable)
   local instance = {
     Name = _name,
     Type = _type,
