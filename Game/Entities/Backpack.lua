@@ -18,6 +18,7 @@ end
 --Métodos
 function Backpack:ViewBackpack()
   print("Espaço Máximo: " .. self.MaxSlots .. " | Espaços Utilizado: " .. #self.Slots)
+
   for i, v in pairs(self.Slots) do
     --print(" [".. i .."] " .. v.Name .. " | Tipo: " .. v.Type .. " | Raridade: " .. v.Rarity .. " | Preço: " .. v.Price)
   end
@@ -33,6 +34,8 @@ function Backpack:PutInBackpack(item)
 end
 
 function Backpack:RemoveFromBackpack(slot)
+  if type(slot) ~= "number" then print("Insira o número do espaço.") return end
+
   if self.Slots[slot] then
     print("[" .. slot .. "] " .. self.Slots[slot].Name .. " removido da mochila.")
     return table.remove(self.Slots, slot)

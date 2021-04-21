@@ -1,38 +1,29 @@
-local Items = {}
+local Item = {}
+Item.__index = Item
 
-function Items.New(name, type, rarity, description, price, marketable, equipable, consumable)
+--Função construtora//
+function Item.New(_name, _type, _rarity, _description, _price, _marketable)
   local instance = {
-    Name = name,
-    Type = type,
-    Class = class,
-    Rarity = rarity,
-    Description = description,
-    Price = price,
-    Marketable = marketable,
-    Equipable = equipable,
-    Consumable = consumable,
+    Name = _name,
+    Type = _type,
+    Class = _class,
+    Rarity = _rarity,
+    Description = _description,
+    Price = _price,
+    Marketable = _marketable,
   }
-  setmetatable(instance, {__index = Items})
+
+  setmetatable(instance, Item)
   return instance
 end
 
-function Items:ViewDescription()
-  print("Nome: " .. self.Name)
-  print("Tipo: " .. self.Type)
-  print("Raridade: " .. self.Rarity)
-  print("Preço: " .. self.Price)
-  print("Description: " .. self.Description)
-end
-
-function Items:Sell(player)
-  if player.InShop and self.Marketable then
-    player.Money = player.Money + self.Price
-    return table.remove(player.Backpack, self.BackpackSlot)
+--Métodos//
+function Item:Destroy()
+  for i, v in pairs(self) do
+    self[i] = nil
   end
+
+  setmetatable(self, nil)
 end
 
-function Items:Destroy(player)
-  table.remove(player.Backpack, self.BackpackSlot)
-end
-
-return Items
+return Item
